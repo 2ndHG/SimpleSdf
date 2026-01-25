@@ -13,7 +13,7 @@ public class SimpleSdf
         return typeface;
 
     }
-    
+
     public static SimpleSdfResult GenerateSdfBitmap(Typeface typeface, char c, float fontSize, int padding, float range)
     {
         int unitsPerEm = typeface.UnitsPerEm;
@@ -36,6 +36,8 @@ public class SimpleSdf
         float originX = translateX;
         float originY = bitmapHeight - (-bounds.XMin * scale + padding);
 
+        float advanceWidth = glyph.OriginalAdvanceWidth * scale;
+
         Shape shape = new(glyph);
         float[] sdfData = SdfGenerator.Generate(shape,
             bitmapWidth,
@@ -52,7 +54,7 @@ public class SimpleSdf
             pixelData[i] = (byte)(sdfData[i] * 255);
         }
 
-        return new SimpleSdfResult() { Bitmap = sdfData, BitmapWidth = bitmapWidth, BitmapHeight = bitmapHeight, FontSize = fontSize, Origin = new Vector2(originX, originY), Range = range };
+        return new SimpleSdfResult() { Bitmap = sdfData, BitmapWidth = bitmapWidth, BitmapHeight = bitmapHeight, FontSize = fontSize, Origin = new Vector2(originX, originY), Range = range, AdvanceWidth = advanceWidth };
     }
 
 }
