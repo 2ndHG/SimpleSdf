@@ -48,12 +48,6 @@ public class SimpleSdf
             range
         );
 
-        byte[] pixelData = new byte[sdfData.Length];
-        for (int i = 0; i < sdfData.Length; i++)
-        {
-            pixelData[i] = (byte)(sdfData[i] * 255);
-        }
-
         return new SimpleSdfResult() { Bitmap = sdfData, BitmapWidth = bitmapWidth, BitmapHeight = bitmapHeight, FontSize = fontSize, Origin = new Vector2(originX, originY), Range = range, AdvanceWidth = advanceWidth };
     }
 
