@@ -36,7 +36,9 @@ public class SimpleSdf
         float originX = translateX;
         float originY = bitmapHeight - (-bounds.XMin * scale + padding);
 
-        float advanceWidth = glyph.OriginalAdvanceWidth * scale;
+        // I thought originalAdvanceWidth shall be at glyph.OriginalAdvanceWidth
+        // However, it seems we need to use some GlyphBitmapDataFormatBase class and call their FillGlyphInfo to fill info into the glyph object
+        float advanceWidth = typeface.GetHAdvanceWidthFromGlyphIndex(glyphIndex) * scale;
 
         Shape shape = new(glyph);
         float[] sdfData = SdfGenerator.Generate(shape,
